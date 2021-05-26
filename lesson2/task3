@@ -1,0 +1,9 @@
+$ mysqldump example > example.sql
+
+$ mysql
+
+mysql> CREATE DATABASE sample;
+
+mysql> QUIT
+
+$ mysql sample < example.sql
