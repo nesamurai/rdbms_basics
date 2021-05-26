@@ -1,0 +1,34 @@
+sudo apt-get update
+
+sudo apt-get upgrade
+
+sudo apt-get install mysql-server
+
+mysql --version  # mysql Ver 8.0.25-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
+
+ps aux | grep mysqld
+
+sudo service mysql start
+
+mysql
+
+CREATE DATABASE example;
+
+USE example
+
+CREATE TABLE users (
+  id INT UNSIGNED,
+  name VARCHAR(255)
+);
+
+QUIT
+
+mysqldump example > example.sql
+
+mysql
+
+CREATE DATABASE sample;
+
+QUIT
+
+mysql sample < example.sql
