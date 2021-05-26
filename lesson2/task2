@@ -1,0 +1,12 @@
+$ mysql
+
+mysql> CREATE DATABASE example;
+
+mysql> USE example
+
+mysql> CREATE TABLE users (
+  id INT UNSIGNED,
+  name VARCHAR(255)
+);
+
+mysql> QUIT
