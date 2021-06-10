@@ -19,7 +19,7 @@ CREATE TABLE media (
 	id SERIAL,
     media_type_id BIGINT UNSIGNED NOT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
-  	body text,
+  	body TEXT,
     filename VARCHAR(255),
     size INT,
 	metadata JSON,
