@@ -117,9 +117,11 @@ CREATE TABLE games (
 
 CREATE TABLE notifications (
     id SERIAL,
+	user_id BIGINT UNSIGNED NOT NULL,
+	body TEXT,
     received_at DATETIME DEFAULT NOW(),
     community_id BIGINT UNSIGNED NOT NULL,
-    body TEXT,
+	FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (community_id) REFERENCES communities(id)
 );
 
