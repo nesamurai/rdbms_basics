@@ -71,8 +71,8 @@ CREATE TABLE `photo_albums` (
 
 CREATE TABLE photos (
 	id SERIAL,
-	album_id BIGINT unsigned,
-	media_id BIGINT unsigned NOT NULL,
+	album_id BIGINT UNSIGNED,
+	media_id BIGINT UNSIGNED NOT NULL,
 	FOREIGN KEY (album_id) REFERENCES photo_albums(id),
     FOREIGN KEY (media_id) REFERENCES media(id)
 );
