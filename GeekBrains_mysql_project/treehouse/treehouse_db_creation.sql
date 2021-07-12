@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS treehouse;
+CREATE DATABASE treehouse;
+USE treehouse;
+
 -- table 1
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
@@ -10,9 +14,9 @@ CREATE TABLE courses (
     level ENUM('Beginner', 'Intermediate', 'Advanced'),
     description TEXT,
     points INT DEFAULT 0,
-    FOREIGN KEY teacher_id REFERENCES instructors(id),
-    FOREIGN KEY topic_id REFERENCES topics(id),
-    FOREIGN KEY track_id REFERENCES tracks(id),
+    FOREIGN KEY (teacher_id) REFERENCES instructors(id),
+    FOREIGN KEY (topic_id) REFERENCES topics(id),
+    FOREIGN KEY (track_id) REFERENCES tracks(id),
 );
 
 -- table 2
@@ -24,7 +28,7 @@ CREATE TABLE steps (
     course_id INT UNSIGNED NOT NULL,
     status ENUM('initial', 'completed'),
     number_of_steps INT UNSIGNED NOT NULL COMMENT 'Количество видео, заданий, тестов для завершения шага',
-    FOREIGN KEY course_id REFERENCES courses(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
 );
 
 -- table 3
@@ -32,8 +36,7 @@ DROP TABLE IF EXISTS instructors;
 CREATE TABLE instructors (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    bio TEXT,
-    photo
+    bio TEXT
 );
 
 -- table 4
@@ -44,9 +47,9 @@ CREATE TABLE achievements (
     course_id INT UNSIGNED NOT NULL,
     user_id INT UNSIGNED NOT NULL,
     achieved_at DATETIME DEFAULT NOW(),
-    FOREING KEY step_name REFERENCES steps(name),
-    FOREING KEY course_id REFERENCES courses(id),
-    FOREING KEY user_id REFERENCES users(id)
+    FOREING KEY (step_name) REFERENCES steps(name),
+    FOREING KEY (course_id) REFERENCES courses(id),
+    FOREING KEY (user_id) REFERENCES users(id)
 );
 
 -- table 5
@@ -64,8 +67,8 @@ CREATE TABLE completed_courses (
     course_id INT UNSIGNED NOT NULL,
     points_achieved INT UNSIGNED,
     user_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY course_id REFERENCES courses(id),
-    FOREIGN KEY user_id REFERENCES users(id)
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- table 7
@@ -79,7 +82,7 @@ CREATE TABLE profiles (
     country CHAR(2),
     spoken_language VARCHAR(128),
     user_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY user_id REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
     INDEX idx_first_and_last_names(first_name, last_name)
 );
 
@@ -89,8 +92,8 @@ CREATE TABLE subscription (
     id SERIAL PRIMARY KEY,
     plan_id INT UNSIGNED NOT NULL,
     user_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY plan_id REFERENCES subscription_plans(id),
-    FOREIGN KEY user_id REFERENCES users(id)
+    FOREIGN KEY (plan_id) REFERENCES subscription_plans(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- table 9
@@ -111,8 +114,7 @@ CREATE TABLE billing_history (
     date_of_payment DATETIME,
     payment_status VARCHAR(32) DEFAULT 'Paid',
     amount DECIMAL(8,2),
-    pdf_file,
-    FOREIGN KEY user_id REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- table 11
@@ -128,7 +130,7 @@ CREATE TABLE topics (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
     teacher_id INT UNSIGNED,
-    FOREIGN KEY teacher_id REFERENCES instructors(id)
+    FOREIGN KEY (teacher_id) REFERENCES instructors(id)
 );
 
 -- table 13
@@ -138,6 +140,6 @@ CREATE TABLE bookmarks (
     course_id INT UNSIGNED NOT NULL,
     user_id INT UNSIGNED NOT NULL,
     has_bookmark CHAR(1) DEFAULT '1',
-    FOREIGN KEY course_id REFERENCES courses(id),
-    FOREIGN KEY user_id REFERENCES users(id)
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
