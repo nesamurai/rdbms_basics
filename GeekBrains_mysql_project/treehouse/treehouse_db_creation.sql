@@ -124,7 +124,8 @@ CREATE TABLE tracks (
     name VARCHAR(255)
 );
 
--- table 12
+-- table 12 содержит названия топиков курсов, например Python или Databases, и
+-- id преподавателей по топикам
 DROP TABLE IF EXISTS topics;
 CREATE TABLE topics (
     id SERIAL PRIMARY KEY,

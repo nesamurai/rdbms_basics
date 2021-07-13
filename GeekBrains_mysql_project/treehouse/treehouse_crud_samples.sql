@@ -66,3 +66,9 @@ VALUES (1, '77855038', '12.09.2020', 29.99), (1, '77899430', '12.10.2020', 29.99
 
 INSERT INTO bookmarks(course_id, user_id)
 VALUES (4, 2);
+
+
+-- Изменим план подписки у пользователя
+UPDATE subscription
+SET plan_id = 2
+WHERE user_id = 2;
