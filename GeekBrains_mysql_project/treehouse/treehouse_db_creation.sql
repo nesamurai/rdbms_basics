@@ -43,11 +43,11 @@ CREATE TABLE instructors (
 DROP TABLE IF EXISTS achievements;
 CREATE TABLE achievements (
     id SERIAL PRIMARY KEY,
-    step_name VARCHAR(128),
+    step_id INT UNSIGNED NOT NULL,
     course_id INT UNSIGNED NOT NULL,
     user_id INT UNSIGNED NOT NULL,
     achieved_at DATETIME DEFAULT NOW(),
-    FOREING KEY (step_name) REFERENCES steps(name),
+    FOREING KEY (step_id) REFERENCES steps(id),
     FOREING KEY (course_id) REFERENCES courses(id),
     FOREING KEY (user_id) REFERENCES users(id)
 );
@@ -65,8 +65,8 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS completed_courses;
 CREATE TABLE completed_courses (
     course_id INT UNSIGNED NOT NULL,
-    points_achieved INT UNSIGNED,
     user_id INT UNSIGNED NOT NULL,
+    points_achieved INT UNSIGNED,
     FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -74,11 +74,11 @@ CREATE TABLE completed_courses (
 -- table 7
 DROP TABLE IF EXISTS profiles;
 CREATE TABLE profiles (
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    email_address VARCHAR(255),
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email_address VARCHAR(128),
     password VARCHAR(16),
-    profile_name VARCHAR(255),
+    profile_name VARCHAR(128),
     country CHAR(2),
     spoken_language VARCHAR(128),
     user_id INT UNSIGNED NOT NULL,
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS subscription_plans;
 CREATE TABLE subscription_plans (
     id SERIAL PRIMARY KEY,
     plan_name VARCHAR(100),
-    plan_price CHAR(6),
+    plan_price CHAR(7),
     plan_content TEXT
 );
 
