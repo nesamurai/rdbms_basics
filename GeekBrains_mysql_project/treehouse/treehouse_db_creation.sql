@@ -3,6 +3,9 @@ CREATE DATABASE treehouse;
 USE treehouse;
 
 -- table 1
+-- таблица содержит данные по курсам, где стоблцами являются
+-- назавание курса, длительность, ид_преподавателя, ид_топика, ид_трека
+-- уровень, описание и очки за курс
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
     id SERIAL PRIMARY KEY,
@@ -20,6 +23,9 @@ CREATE TABLE courses (
 );
 
 -- table 2
+-- в таблице содержатся стоблцы с названием шага, ид_значка за прохождение шага,
+-- ид_курса, к которому принадлежит шаг, статус шага (на начат или завершен),
+-- количество заданий и видео в шаге
 DROP TABLE IF EXISTS steps;
 CREATE TABLE steps (
     id SERIAL PRIMARY KEY,
@@ -32,6 +38,7 @@ CREATE TABLE steps (
 );
 
 -- table 3
+-- данные о преподавателях, где столбец bio - краткая справка
 DROP TABLE IF EXISTS instructors;
 CREATE TABLE instructors (
     id SERIAL PRIMARY KEY,
@@ -40,6 +47,8 @@ CREATE TABLE instructors (
 );
 
 -- table 4
+-- в таблице содержится достижение за пройденный шаг, какому курсу соответствует,
+-- ид_пользователя, когда достигнуто
 DROP TABLE IF EXISTS achievements;
 CREATE TABLE achievements (
     id SERIAL PRIMARY KEY,
@@ -53,6 +62,7 @@ CREATE TABLE achievements (
 );
 
 -- table 5
+-- пользователи с датой регистрации и общими очками за пройденные курсы
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -62,6 +72,7 @@ CREATE TABLE users (
 );
 
 -- table 6
+-- завершенные курсы по пользователям с очками за курс
 DROP TABLE IF EXISTS completed_courses;
 CREATE TABLE completed_courses (
     course_id INT UNSIGNED NOT NULL,
@@ -72,6 +83,7 @@ CREATE TABLE completed_courses (
 );
 
 -- table 7
+-- данные профиля пользователей
 DROP TABLE IF EXISTS profiles;
 CREATE TABLE profiles (
     first_name VARCHAR(128),
@@ -87,6 +99,7 @@ CREATE TABLE profiles (
 );
 
 -- table 8
+-- сооветствие подписки и пользователя
 DROP TABLE IF EXISTS subscription;
 CREATE TABLE subscription (
     id SERIAL PRIMARY KEY,
@@ -97,6 +110,7 @@ CREATE TABLE subscription (
 );
 
 -- table 9
+-- типы подписок с назаванием, ценой и что включает
 DROP TABLE IF EXISTS subscription_plans;
 CREATE TABLE subscription_plans (
     id SERIAL PRIMARY KEY,
@@ -106,6 +120,8 @@ CREATE TABLE subscription_plans (
 );
 
 -- table 10
+-- история платежей пользователя, с номером оплаты,
+-- днем оплаты, статусом оплаты, стоимостью
 DROP TABLE IF EXISTS billing_history;
 CREATE TABLE billing_history (
     id SERIAL PRIMARY KEY,
@@ -118,6 +134,8 @@ CREATE TABLE billing_history (
 );
 
 -- table 11
+-- названия треков
+-- несколько курсов составляют трек
 DROP TABLE IF EXISTS tracks;
 CREATE TABLE tracks (
     id SERIAL PRIMARY KEY,
@@ -135,6 +153,8 @@ CREATE TABLE topics (
 );
 
 -- table 13
+-- запланированные курсы по пользователям, где столбец has_bookmark
+-- работает как true/false
 DROP TABLE IF EXISTS bookmarks;
 CREATE TABLE bookmarks (
     id SERIAL,
